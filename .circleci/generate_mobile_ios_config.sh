@@ -35,12 +35,7 @@ jobs:
           paths:
             - node_modules
 
-      - run:
-          name: Webhook Failed
-          command: bash .circleci/webhook_callback.sh "failure"
-          when: on_fail
-
-  ios:
+     ios:
     macos:
       xcode: "13.0.0"
     working_directory: ~/build
@@ -150,16 +145,6 @@ jobs:
 
       - store_artifacts:
           path: ios/app-release.ipa
-
-      - run:
-          name: Webhook Success
-          command: bash .circleci/webhook_callback.sh "success"
-          when: on_success
-
-      - run:
-          name: Webhook Failed
-          command: bash .circleci/webhook_callback.sh "failure"
-          when: on_fail
 
 workflows:
   version: 2.1
