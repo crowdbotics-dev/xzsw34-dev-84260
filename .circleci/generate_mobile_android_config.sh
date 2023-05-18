@@ -49,12 +49,8 @@ jobs:
       #- store_artifacts:
       #    path: test-results
 
-      - run:
-          name: Webhook Failed
-          command: bash .circleci/webhook_callback.sh "failure"
-          when: on_fail
-
-  android:
+      
+android:
     working_directory: ~/build
     docker:
       - image: reactnativecommunity/react-native-android:5.4
@@ -156,16 +152,6 @@ jobs:
               git push -q https://$GITHUB_WRITE_TOKEN@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git master
             fi
           working_directory: android
-
-      - run:
-          name: Webhook Success
-          command: bash .circleci/webhook_callback.sh "success"
-          when: on_success
-
-      - run:
-          name: Webhook Failed
-          command: bash .circleci/webhook_callback.sh "failure"
-          when: on_fail
 
 workflows:
   version: 2.1
